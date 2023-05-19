@@ -85,22 +85,26 @@ def abrir_notas():
     entry_bim.focus_set()
     entry_bim.place(x=200,y=300, height=30, width=100)
 
-    # boton para calcular
-    bt = Button(frame_entrada, text="cALCULAR")
-    bt.place(x=120, y=350)
 
-    def calcular():
-        cong = int(entry_c.get())
-        proc = int(entry_proc.get())
-        act = int(entry_act.get())
-        auto = int(entry_auto.get())
-        bim = int(entry_bim.get())
-        defit=(0.3*cong)+(0.3*proc)+(0.1*act)+(0.1*auto)+(0.2*bim)
+    def calcular_notas():
+        messagebox.showinfo("Nota Difinitiva", "Operacion realizada")
 
+        # variables notas
+        entry_proc_def = float(entry_proc.get())
+        entry_c_def = float(entry_c.get())
+        entry_auto_def = float(entry_auto.get())
+        entry_act_def = float(entry_act.get())
+        entry_bim_def = float(entry_bim.get())
 
+        entry_not_final = (0.3*entry_proc_def) + (0.3*entry_c_def) + (0.1*entry_auto_def) + (0.1*entry_act_def) + (0.2*entry_bim_def)
 
-
-
+        if entry_not_final < 30:
+                messagebox.showinfo("Resultado", "su nota definitiva es:  "+str(entry_not_final))
+        else:
+                messagebox.showinfo("Resultado", "su nota definitiva es:  "+str(entry_not_final))
+# boton para convertir
+    bt_convertir = Button(abrir_notas, text="Resultado", command=calcular_notas)
+    bt_convertir.place(x=130, y=400, width=100, height=80)
 
 
 
@@ -142,25 +146,48 @@ def abrir_imc():
     lb_c.place(x=50, y=150)
 
     # caja de texto 
-    entry_ = Entry(frame_entrada, )
-    entry_.config(bg="white", fg="blue", font=("Times New Roman", 10), width=6)
-    entry_.focus_set()
-    entry_.place(x=200,y=150, height=30, width=100)
+    entry_peso= Entry(frame_entrada, )
+    entry_peso.config(bg="white", fg="blue", font=("Times New Roman", 10), width=6)
+    entry_peso.focus_set()
+    entry_peso.place(x=200,y=150, height=30, width=100)
 
     # etiqueta para el dato
-    lb_c = Label(frame_entrada, text = " Altura= ")
+    lb_c = Label(frame_entrada, text = " Estatura= ")
     lb_c.config(bg="white", fg="blue", font=("Comic Sans MS", 20))
     lb_c.place(x=50, y=200)
 
     # caja de texto 
-    entry_ = Entry(frame_entrada, )
-    entry_.config(bg="white", fg="blue", font=("Times New Roman", 10), width=6)
-    entry_.focus_set()
-    entry_.place(x=200,y=200, height=30, width=100)
+    entry_estatura = Entry(frame_entrada, )
+    entry_estatura.config(bg="white", fg="blue", font=("Times New Roman", 10), width=6)
+    entry_estatura.focus_set()
+    entry_estatura.place(x=200,y=200, height=30, width=100)
 
 
+    def convertir_imc():
+        estatura = float(entry_estatura.get())
+        peso = float(entry_peso.get())
+        imc = peso/estatura**2
 
+        if imc < 16:
+            messagebox.showinfo("resultado","esta muy flaco")
+        elif imc < 17:
+            messagebox.showinfo("resultados","esta en delgadez moderada")
+        elif imc <18.5:
+            messagebox.showinfo("resultados","esta en delgadez ligera") 
+        elif imc < 25:
+            messagebox.showinfo("resultdos","esta saludable")       
+        elif imc < 30:
+            messagebox.showinfo("resultados","esta en sobrepeso,cuidese mas")
+        elif imc < 35:
+            messagebox.showinfo("resultados","esta en obecidad I grado") 
+        elif imc < 34:
+            messagebox.showinfo("resultados","esta en obecidad II grado")  
+        else:
+            messagebox.showinfo("resultados","esta en obecidad II grado")  
 
+    # boton para calcular
+    bt_convertir= Button(abrir_imc, text="Masa corporal", command=convertir_imc)
+    bt_convertir.place(x=130, y=280, width= 100, height= 80)
 
 
 
@@ -172,7 +199,7 @@ def abrir_imc():
 ventana_principal = Tk()
 
 # titulo de la ventana
-ventana_principal.title("Renyelis Luyando")
+ventana_principal.title("Renyelis del Carmen Luyando Capitillo")
 
 # tamaño de la ventana
 ventana_principal.geometry("500x700")
@@ -200,7 +227,7 @@ barra_menu.add_cascade(label="Salir", menu=menu_salir)
 # Todo
 
 frame_entrada = Frame(ventana_principal)
-frame_entrada.config(bg="white", width=480, height=650)
+frame_entrada.config(bg="white", width=480, height=600)
 frame_entrada.place(x=10, y=10)
 
 # logo de la app
@@ -220,9 +247,9 @@ lb_c.place(x=50, y=200)
 
 # caja de texto 
 entry_ = Entry(frame_entrada, )
-entry_.config(bg="white", fg="blue", font=("Times New Roman", 20), width=6)
+entry_.config(bg="white", fg="blue", font=("Times New Roman", 10), width=6)
 entry_.focus_set()
-entry_.place(x=200,y=200, height=30, width=100)
+entry_.place(x=200,y=200, height=30, width=150)
 
 # etiqueta para el dato
 lb_c = Label(frame_entrada, text = " Grado = ")
@@ -231,9 +258,9 @@ lb_c.place(x=50, y=250)
 
 # caja de texto 
 entry_ = Entry(frame_entrada, )
-entry_.config(bg="white", fg="blue", font=("Times New Roman", 20), width=6)
+entry_.config(bg="white", fg="blue", font=("Times New Roman", 10), width=6)
 entry_.focus_set()
-entry_.place(x=200,y=250, height=30, width=100)
+entry_.place(x=200,y=250, height=30, width=150)
 
 # etiqueta para el dato
 lb_c = Label(frame_entrada, text = " Edad = ")
@@ -242,9 +269,9 @@ lb_c.place(x=50, y=300)
 
 # caja de texto 
 entry_ = Entry(frame_entrada, )
-entry_.config(bg="white", fg="blue", font=("Times New Roman", 20), width=6)
+entry_.config(bg="white", fg="blue", font=("Times New Roman", 10), width=6)
 entry_.focus_set()
-entry_.place(x=200,y=300, height=30, width=100)
+entry_.place(x=200,y=300, height=30, width=150)
 
 
 imgn= PhotoImage(file="img/cal.png")
@@ -261,14 +288,5 @@ bt_imc.place(x=250,y=350)
 frame_resultados = Frame(ventana_principal)
 frame_resultados.config(bg="white", width=400, height=80)
 frame_resultados.place(x=45, y=500)
-
-# area de texto para los resultados
-t_resultados = Text(frame_resultados)
-t_resultados.config(bg="black", fg="green yellow", font=("Courier", 18))
-t_resultados.place(x=10,y=10,width=460,height=160)
-
-
-
-
 
 ventana_principal.mainloop()
